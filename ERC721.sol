@@ -47,3 +47,25 @@ interface IERC721Receiver {
     ) external returns (bytes4);
 }
 
+contract ERC721 is IERC721 {
+    event Transfer(address indexed from, address indexed to, uint indexed id);
+    event Approval(address indexed owner, address indexed spender, uint indexed id);
+    event ApprovalForAll(
+        address indexed owner,
+        address indexed operator,
+        bool approved
+    );
+
+    // Mapping from token ID to owner address
+    mapping(uint => address) internal _ownerOf;
+
+    // Mapping owner address to token count
+    mapping(address => uint) internal _balanceOf;
+
+    // Mapping from token ID to approved address
+    mapping(uint => address) internal _approvals;
+
+    // Mapping from owner to operator approvals
+    mapping(address => mapping(address => bool)) public isApprovedForAll;
+}
+
