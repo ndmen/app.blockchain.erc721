@@ -74,7 +74,7 @@ contract ERC721 is IERC721 {
 
     function ownerOf(uint id) external view returns (address owner) {
         owner = _ownerOf[id];
-        require(owner != address(0), "token dosen't exist");
+        require(owner != address(0), "token doesn't exist");
     }
 
     function balanceOf(address owner) external view returns (uint) {
@@ -95,5 +95,12 @@ contract ERC721 is IERC721 {
 
         emit Approval(owner, spender, id);
     }
+
+    function getApproved(uint id) external view returns (address) {
+        require(_ownerOf[id] != address(0), "token doesn't exist");
+        return _approvals[id];
+    }
+
+    
 }
 
