@@ -87,6 +87,13 @@ contract ERC721 is IERC721 {
         emit ApprovalForAll(msg.sender, operator, approved);
     }
 
-    
+    function approve(address spender, uint id) external {
+        address owner = _ownerOf[id];
+        require(msg.sender == owner || isApprovedForAll[owner][msg.sender], "not authorized");
+
+        _approvals[id] = spender;
+
+        emit Approval(owner, spender, id);
+    }
 }
 
