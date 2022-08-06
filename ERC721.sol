@@ -101,6 +101,14 @@ contract ERC721 is IERC721 {
         return _approvals[id];
     }
 
-    
+    function _isApprovedOrOwner(
+        address owner,
+        address spender,
+        uint id
+    ) internal view returns (bool) {
+        return (spender == owner || 
+        isApprovedForAll[owner][spender] || 
+        spender == _approvals[id]);
+    }
 }
 
