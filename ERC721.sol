@@ -76,5 +76,10 @@ contract ERC721 is IERC721 {
         owner = _ownerOf[id];
         require(owner != address(0), "token dosen't exist");
     }
+
+    function balanceOf(address owner) external view returns (uint) {
+        require(owner != address(0), "owner = zero address");
+        return _balanceOf[owner];
+    }
 }
 
