@@ -129,5 +129,20 @@ contract ERC721 is IERC721 {
 
         emit Transfer(from, to, id);
     }
+
+    function safeTransferFrom(
+        address from, 
+        address to, 
+        uint id
+    ) external {
+        TransferFrom(from, to, id);
+
+        require(
+            to.code.length == 0 || 
+                IERC721Receiver(to).onERC721Received(msg.sender, from, id, "") == 
+                IERC721Receiver.onERC721Received.selector,
+                "unsafe recipient"
+        );
+    }
 }
 
