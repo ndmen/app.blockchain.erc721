@@ -160,5 +160,15 @@ contract ERC721 is IERC721 {
                 "unsafe recipient"
         );
     }
+
+    function _mint(address to, uint id) internal {
+        require(to != address(0), "mint to zero address");
+        require(_ownerOf[id] == address(0), "alredy minted");
+
+        _balanceOf[to]++;
+        _ownerOf[id] = to;
+
+        emit Transfer(address(0), to, id);
+    }
 }
 
