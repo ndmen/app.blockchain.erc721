@@ -170,5 +170,17 @@ contract ERC721 is IERC721 {
 
         emit Transfer(address(0), to, id);
     }
+
+    function _burn(uint id) internal {
+        address owner = _ownerOf[id];
+        require(owner != address(0), "not minted");
+
+        _balanceOf[owner] -= 1;
+
+        delete _ownerOf[id];
+        delete _approvals[id];
+
+        emit Transfer(owner, address(0), id);
+    }
 }
 
