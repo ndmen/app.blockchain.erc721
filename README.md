@@ -1,5 +1,5 @@
 # app.blockchain.erc721
 
-Example of ERC721
+This is an example of ERC721
 
 
